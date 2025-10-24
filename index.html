@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IronQuest — Gamified Anemia Management</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="/">IronQuest</a></h1>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#detect">Detect</a>
+        <a href="#game">IronQuest Game</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="hero" class="card">
+      <h2>Detect anemia signs with simple images. Learn natural remedies. Play to stay healthy.</h2>
+      <p>Target audience: adolescents and school programs. Privacy friendly, educational, and gamified.</p>
+      <a class="button" href="#detect">Try Detection</a>
+    </section>
+
+    <section id="features" class="card">
+      <h3>Features</h3>
+      <ul>
+        <li>Image-based anemia sign detection (placeholder model included).</li>
+        <li>Natural remedy guidance and iron-rich local recipes.</li>
+        <li>Gamified RPG where in-game strength is tied to real-world supplementation and tracking.</li>
+        <li>Peer competitions, leaderboards, and achievement badges.</li>
+        <li>School / district level campaigns and recipe challenges.</li>
+      </ul>
+    </section>
+
+    <section id="detect" class="card">
+      <h3>Anemia Detection (demo)</h3>
+      <p>Upload an image of a fingernail, inner eyelid, or palmar crease. This demo simulates detection. Replace the placeholder model/model_placeholder.h5 with your trained .h5 model and connect inference on a server or via TensorFlow.js conversion.</p>
+
+      <div class="upload-area">
+        <input id="imageInput" type="file" accept="image/*">
+        <div id="preview" class="preview">No image selected</div>
+        <button id="runDetect" class="button">Run Detection (Simulated)</button>
+      </div>
+
+      <div id="result" class="result hidden">
+        <h4>Detection Result</h4>
+        <p id="resultText"></p>
+        <div id="recommendations"></div>
+      </div>
+
+      <details>
+        <summary>Developer notes</summary>
+        <p>To enable real inference:</p>
+        <ol>
+          <li>Either host a backend (Flask/Node) that loads the Keras .h5 model and exposes a POST /predict endpoint that accepts images and returns predictions.</li>
+          <li>Or convert the Keras model to TensorFlow.js format and run inference client-side.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section id="game" class="card">
+      <h3>IronQuest — Gamified Experience</h3>
+      <p>Concept preview of the IronQuest game mechanics.</p>
+      <ul>
+        <li>RPG character whose energy and strength are powered by 'iron level' points.</li>
+        <li>Daily check-in and supplement logging boosts in-game stats.</li>
+        <li>School leaderboards for healthy habits and recipe challenges.</li>
+        <li>Achievement badges for consistent supplementation and recipe completion.</li>
+      </ul>
+      <a href="#" class="button disabled">Play Prototype (Coming)</a>
+    </section>
+
+    <section id="recipes" class="card">
+      <h3>Iron-rich Recipe Challenges</h3>
+      <p>Example local recipe suggestions and a challenge submission form (mock).</p>
+
+      <form id="recipeForm" onsubmit="return false;">
+        <label>Recipe name<input id="recipeName" placeholder="Local iron-rich dish"></label>
+        <label>Ingredients<textarea id="recipeIngredients" placeholder="List ingredients"></textarea></label>
+        <button id="submitRecipe" class="button">Submit Recipe (Mock)</button>
+      </form>
+
+      <div id="recipeStatus" class="hidden"></div>
+    </section>
+
+    <section id="resources" class="card">
+      <h3>Natural Remedies & Tips</h3>
+      <ul>
+        <li>Include iron-rich foods such as dark leafy greens, legumes, fortified cereals, eggs, and lean meats where culturally appropriate.</li>
+        <li>Pair iron sources with vitamin C (citrus, tomatoes, amla) to improve absorption.</li>
+        <li>Avoid tea/coffee immediately with iron-rich meals for better uptake.</li>
+        <li>For adolescents, consult a health professional before starting supplements.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>IronQuest &copy; 2025. This is a demo project. Replace the placeholder ML model with a validated clinical model before any real use.</small>
+    </div>
+  </footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
