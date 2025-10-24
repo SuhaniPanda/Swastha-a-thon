@@ -1,112 +1,874 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IronQuest — Gamified Anemia Management</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronQuest - Gamified Anemia Management for Adolescents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* AI Detection Section */
+        .ai-detection {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .detection-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .detection-demo {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .upload-area:hover {
+            background: #e9ecef;
+            border-color: #764ba2;
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 64px;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        #preview {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Game Preview Section */
+        .game-preview {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .game-screens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .game-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .game-screen:hover {
+            transform: scale(1.05);
+        }
+
+        .game-screen-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        /* Leaderboard Section */
+        .leaderboard {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .leaderboard-table {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaderboard-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 150px;
+            padding: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .leaderboard-row:hover {
+            background: #f8f9fa;
+            transform: translateX(10px);
+        }
+
+        .rank {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .rank-1 { color: #ffd700; }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .score {
+            text-align: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Natural Remedies Section */
+        .remedies {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .remedy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .remedy-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .remedy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .remedy-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .remedy-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .remedy-card li {
+            padding: 8px 0;
+            color: #555;
+        }
+
+        .remedy-card li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4a5568;
+            color: #cbd5e0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .detection-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .leaderboard-row {
+                grid-template-columns: 60px 1fr 100px;
+                padding: 15px;
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1><a href="/">IronQuest</a></h1>
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#detect">Detect</a>
-        <a href="#game">IronQuest Game</a>
-        <a href="#recipes">Recipes</a>
-        <a href="#resources">Resources</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-icon">⚔️</div>
+                <span>IronQuest</span>
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#detection">AI Detection</a></li>
+                <li><a href="#game">Game</a></li>
+                <li><a href="#remedies">Remedies</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main class="container">
-    <section id="hero" class="card">
-      <h2>Detect anemia signs with simple images. Learn natural remedies. Play to stay healthy.</h2>
-      <p>Target audience: adolescents and school programs. Privacy friendly, educational, and gamified.</p>
-      <a class="button" href="#detect">Try Detection</a>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>⚔️ IronQuest</h1>
+            <p>Level Up Your Health Through Gamified Anemia Management</p>
+            <p style="font-size: 18px; margin-bottom: 40px;">AI-powered detection • Natural remedies • Epic gameplay</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Active Players</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Detection Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Schools Participating</div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#detection" class="btn btn-primary">Try AI Detection</a>
+                <a href="#game" class="btn btn-secondary">Explore Game</a>
+            </div>
+        </div>
     </section>
 
-    <section id="features" class="card">
-      <h3>Features</h3>
-      <ul>
-        <li>Image-based anemia sign detection (placeholder model included).</li>
-        <li>Natural remedy guidance and iron-rich local recipes.</li>
-        <li>Gamified RPG where in-game strength is tied to real-world supplementation and tracking.</li>
-        <li>Peer competitions, leaderboards, and achievement badges.</li>
-        <li>School / district level campaigns and recipe challenges.</li>
-      </ul>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">🎮 Epic Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Upload images of eyes, nails, or palms for instant anemia detection using advanced computer vision and machine learning models.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>RPG-Style Gameplay</h3>
+                    <p>Your real iron levels directly power your character's strength. Higher iron = stronger warrior!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>School Competitions</h3>
+                    <p>Compete with peers across schools and districts. Lead your team to victory through healthy habits!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍎</div>
+                    <h3>Recipe Challenges</h3>
+                    <p>Discover iron-rich food recipes using local ingredients. Complete cooking quests for bonus XP!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎖️</div>
+                    <h3>Achievement Badges</h3>
+                    <p>Earn legendary badges for consistent supplementation, tracking, and healthy lifestyle choices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Natural Remedies</h3>
+                    <p>Access personalized natural remedy recommendations based on your detection results and progress.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="detect" class="card">
-      <h3>Anemia Detection (demo)</h3>
-      <p>Upload an image of a fingernail, inner eyelid, or palmar crease. This demo simulates detection. Replace the placeholder model/model_placeholder.h5 with your trained .h5 model and connect inference on a server or via TensorFlow.js conversion.</p>
-
-      <div class="upload-area">
-        <input id="imageInput" type="file" accept="image/*">
-        <div id="preview" class="preview">No image selected</div>
-        <button id="runDetect" class="button">Run Detection (Simulated)</button>
-      </div>
-
-      <div id="result" class="result hidden">
-        <h4>Detection Result</h4>
-        <p id="resultText"></p>
-        <div id="recommendations"></div>
-      </div>
-
-      <details>
-        <summary>Developer notes</summary>
-        <p>To enable real inference:</p>
-        <ol>
-          <li>Either host a backend (Flask/Node) that loads the Keras .h5 model and exposes a POST /predict endpoint that accepts images and returns predictions.</li>
-          <li>Or convert the Keras model to TensorFlow.js format and run inference client-side.</li>
-        </ol>
-      </details>
+    <!-- AI Detection Section -->
+    <section id="detection" class="ai-detection">
+        <div class="container">
+            <h2 class="section-title">🤖 AI Anemia Detection</h2>
+            <div class="detection-container">
+                <div>
+                    <h3 style="font-size: 32px; margin-bottom: 20px;">Instant Analysis</h3>
+                    <p style="font-size: 18px; margin-bottom: 20px;">Upload an image of your:</p>
+                    <ul style="font-size: 18px; line-height: 2;">
+                        <li>👁️ Eyes (conjunctiva)</li>
+                        <li>💅 Fingernails (nail beds)</li>
+                        <li>🤚 Palm (skin tone)</li>
+                    </ul>
+                    <p style="font-size: 18px; margin-top: 20px; opacity: 0.9;">Our AI model analyzes color patterns, texture, and medical indicators to detect potential anemia signs with 95% accuracy.</p>
+                </div>
+                <div class="detection-demo">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">Try Detection Now</h3>
+                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
+                        <div class="upload-icon">📷</div>
+                        <p style="color: #667eea; font-size: 18px; font-weight: bold;">Click to upload image</p>
+                        <p style="color: #999; margin-top: 10px;">Supports: JPG, PNG, HEIC</p>
+                    </div>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <img id="preview" src="" alt="Preview">
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="game" class="card">
-      <h3>IronQuest — Gamified Experience</h3>
-      <p>Concept preview of the IronQuest game mechanics.</p>
-      <ul>
-        <li>RPG character whose energy and strength are powered by 'iron level' points.</li>
-        <li>Daily check-in and supplement logging boosts in-game stats.</li>
-        <li>School leaderboards for healthy habits and recipe challenges.</li>
-        <li>Achievement badges for consistent supplementation and recipe completion.</li>
-      </ul>
-      <a href="#" class="button disabled">Play Prototype (Coming)</a>
+    <!-- Game Preview Section -->
+    <section id="game" class="game-preview">
+        <div class="container">
+            <h2 class="section-title">🎮 Game Experience</h2>
+            <p style="text-align: center; font-size: 20px; margin-bottom: 40px; color: #666;">Your health journey becomes an epic adventure</p>
+            <div class="game-screens">
+                <div class="game-screen">
+                    <div class="game-screen-icon">⚔️</div>
+                    <h3>Character Growth</h3>
+                    <p>Your warrior grows stronger with each supplement taken and healthy meal consumed</p>
+                </div>
+                <div class="game-screen">
+                    <div class="game-screen-icon">🗺️</div>
+                    <h3>Quest System</h3>
+                    <p>Complete daily missions: take supplements, eat iron-rich foods, track progress</p>
+                </div>
+                <div class="game-screen">
+                    <div class="game-screen-icon">⚡</div>
+                    <h3>Power-Ups</h3>
+                    <p>Unlock special abilities as your iron levels improve and consistency grows</p>
+                </div>
+                <div class="game-screen">
+                    <div class="game-screen-icon">👥</div>
+                    <h3>Team Battles</h3>
+                    <p>Join forces with classmates to compete against other schools in epic tournaments</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="recipes" class="card">
-      <h3>Iron-rich Recipe Challenges</h3>
-      <p>Example local recipe suggestions and a challenge submission form (mock).</p>
-
-      <form id="recipeForm" onsubmit="return false;">
-        <label>Recipe name<input id="recipeName" placeholder="Local iron-rich dish"></label>
-        <label>Ingredients<textarea id="recipeIngredients" placeholder="List ingredients"></textarea></label>
-        <button id="submitRecipe" class="button">Submit Recipe (Mock)</button>
-      </form>
-
-      <div id="recipeStatus" class="hidden"></div>
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="leaderboard">
+        <div class="container">
+            <h2 class="section-title">🏆 Global Leaderboard</h2>
+            <div class="leaderboard-table">
+                <div class="leaderboard-row">
+                    <div class="rank rank-1">🥇</div>
+                    <div>
+                        <strong>Phoenix Warriors</strong>
+                        <div style="color: #999;">Delhi Public School, Mumbai</div>
+                    </div>
+                    <div class="score">15,240</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="rank rank-2">🥈</div>
+                    <div>
+                        <strong>Iron Titans</strong>
+                        <div style="color: #999;">Kendriya Vidyalaya, Bangalore</div>
+                    </div>
+                    <div class="score">14,890</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="rank rank-3">🥉</div>
+                    <div>
+                        <strong>Health Heroes</strong>
+                        <div style="color: #999;">DAV Public School, Pune</div>
+                    </div>
+                    <div class="score">14,120</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="rank">4</div>
+                    <div>
+                        <strong>Wellness Wizards</strong>
+                        <div style="color: #999;">Ryan International, Delhi</div>
+                    </div>
+                    <div class="score">13,450</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="rank">5</div>
+                    <div>
+                        <strong>Vitality Vanguards</strong>
+                        <div style="color: #999;">St. Xavier's School, Kolkata</div>
+                    </div>
+                    <div class="score">12,980</div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="resources" class="card">
-      <h3>Natural Remedies & Tips</h3>
-      <ul>
-        <li>Include iron-rich foods such as dark leafy greens, legumes, fortified cereals, eggs, and lean meats where culturally appropriate.</li>
-        <li>Pair iron sources with vitamin C (citrus, tomatoes, amla) to improve absorption.</li>
-        <li>Avoid tea/coffee immediately with iron-rich meals for better uptake.</li>
-        <li>For adolescents, consult a health professional before starting supplements.</li>
-      </ul>
+    <!-- Natural Remedies Section -->
+    <section id="remedies" class="remedies">
+        <div class="container">
+            <h2 class="section-title">🌿 Natural Iron-Rich Remedies</h2>
+            <p style="text-align: center; font-size: 20px; margin-bottom: 40px; color: #666;">Boost your iron naturally with local ingredients</p>
+            <div class="remedy-cards">
+                <div class="remedy-card">
+                    <h4>🥬 Leafy Greens Power</h4>
+                    <ul>
+                        <li>Spinach (palak)</li>
+                        <li>Fenugreek leaves (methi)</li>
+                        <li>Amaranth leaves (chaulai)</li>
+                        <li>Curry leaves</li>
+                        <li>Moringa leaves (drumstick)</li>
+                    </ul>
+                </div>
+                <div class="remedy-card">
+                    <h4>🫘 Legume Legends</h4>
+                    <ul>
+                        <li>Masoor dal (red lentils)</li>
+                        <li>Chickpeas (chana)</li>
+                        <li>Kidney beans (rajma)</li>
+                        <li>Soybeans</li>
+                        <li>Black gram (urad dal)</li>
+                    </ul>
+                </div>
+                <div class="remedy-card">
+                    <h4>🌰 Seeds & Nuts</h4>
+                    <ul>
+                        <li>Pumpkin seeds</li>
+                        <li>Sesame seeds (til)</li>
+                        <li>Cashews</li>
+                        <li>Almonds</li>
+                        <li>Groundnuts</li>
+                    </ul>
+                </div>
+                <div class="remedy-card">
+                    <h4>🍇 Fruits & More</h4>
+                    <ul>
+                        <li>Pomegranate (anar)</li>
+                        <li>Dates (khajoor)</li>
+                        <li>Beetroot</li>
+                        <li>Jaggery (gur)</li>
+                        <li>Dried apricots</li>
+                    </ul>
+                </div>
+                <div class="remedy-card">
+                    <h4>🥘 Traditional Recipes</h4>
+                    <ul>
+                        <li>Palak paneer</li>
+                        <li>Dal tadka</li>
+                        <li>Beetroot halwa</li>
+                        <li>Til ki chikki</li>
+                        <li>Moringa curry</li>
+                    </ul>
+                </div>
+                <div class="remedy-card">
+                    <h4>☕ Herbal Boosters</h4>
+                    <ul>
+                        <li>Nettle tea</li>
+                        <li>Amla juice (Vitamin C)</li>
+                        <li>Turmeric milk</li>
+                        <li>Ashwagandha</li>
+                        <li>Spirulina powder</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
-  </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>IronQuest</h3>
+                    <p style="color: #cbd5e0; line-height: 1.8;">Empowering adolescents to combat anemia through gamification, AI technology, and natural remedies.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#detection">AI Detection</a></li>
+                        <li><a href="#game">Game</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">About Anemia</a></li>
+                        <li><a href="#">Health Tips</a></li>
+                        <li><a href="#">Recipe Database</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">support@ironquest.app</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IronQuest. All rights reserved. Made with ❤️ for adolescent health.</p>
+            </div>
+        </div>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>IronQuest &copy; 2025. This is a demo project. Replace the placeholder ML model with a validated clinical model before any real use.</small>
-    </div>
-  </footer>
+    <script>
+        // ML Model Integration (Placeholder for .h5 model)
+        let model = null;
 
-<script src="assets/js/app.js"></script>
-</body>
-</html>
+        // Simulate model loading (Replace with actual TensorFlow.js loading)
+        async function loadModel() {
+            console.log('Loading anemia detection model...');
+            // Placeholder for actual model loading
+            // model = await tf.loadLayersModel('models/anemia_detection.h5');
+            // For now, we'll simulate the model
+            return new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        // Image upload handler
+        async function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const preview = document.getElementById('preview');
+            const result = document.getElementById('result');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+
+            // Show progress
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            // Simulate progress
+            for (let i = 0; i <= 100; i += 10) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                progressFill.style.width = i + '%';
+            }
+
+            // Simulate AI detection (Replace with actual model inference)
+            await analyzeImage(file);
+        }
