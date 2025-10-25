@@ -1096,30 +1096,30 @@
                 result.style.display = 'block';
                 result.innerHTML = `
                     <div style="text-align: center;">
-                        <h3 style="color: ${prediction.color}; font-size: 28px; margin-bottom: 20px;">
+                        <h3 style="color: ${prediction.color}; font-size: 28px; margin-bottom: 20px; font-weight: bold;">
                             ${prediction.status}
                         </h3>
                         <div style="background: ${prediction.color}22; padding: 20px; border-radius: 10px; margin: 20px 0;">
                             <div style="font-size: 48px; font-weight: bold; color: ${prediction.color};">
                                 ${prediction.confidence}%
                             </div>
-                            <div style="color: #666; margin-top: 5px;">Confidence Level</div>
+                            <div style="color: #333; margin-top: 5px; font-weight: 600;">Confidence Level</div>
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                                <div style="color: #667eea; font-weight: bold;">Iron Level</div>
-                                <div style="font-size: 20px; margin-top: 5px;">${prediction.ironLevel}</div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border: 2px solid #667eea;">
+                                <div style="color: #667eea; font-weight: bold; font-size: 16px;">Iron Level</div>
+                                <div style="font-size: 22px; margin-top: 8px; color: #1a202c; font-weight: bold;">${prediction.ironLevel}</div>
                             </div>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                                <div style="color: #667eea; font-weight: bold;">XP Gained</div>
-                                <div style="font-size: 20px; margin-top: 5px;">+${prediction.xpGain} XP</div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border: 2px solid #667eea;">
+                                <div style="color: #667eea; font-weight: bold; font-size: 16px;">XP Gained</div>
+                                <div style="font-size: 22px; margin-top: 8px; color: #1a202c; font-weight: bold;">+${prediction.xpGain} XP</div>
                             </div>
                         </div>
-                        <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
-                            <strong>💡 Recommendation:</strong><br>
-                            ${prediction.recommendation}
+                        <div style="background: #fff3cd; padding: 18px; border-radius: 10px; border-left: 5px solid #ffc107; border: 2px solid #ffc107;">
+                            <strong style="color: #1a202c; font-size: 17px;">💡 Recommendation:</strong><br>
+                            <span style="color: #1a202c; font-size: 15px; line-height: 1.6; display: block; margin-top: 8px;">${prediction.recommendation}</span>
                         </div>
-                        <button onclick="viewRemedies()" style="margin-top: 20px; padding: 15px 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s;">
+                        <button onclick="viewRemedies()" style="margin-top: 20px; padding: 15px 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
                             View Natural Remedies
                         </button>
                     </div>
