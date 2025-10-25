@@ -515,9 +515,38 @@
             font-size: 16px;
             opacity: 0.9;
         }
+
+        .model-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 9999;
+            display: none;
+        }
+
+        .model-status.loading {
+            background: rgba(255, 193, 7, 0.9);
+            color: #000;
+        }
+
+        .model-status.ready {
+            background: rgba(76, 175, 80, 0.9);
+        }
+
+        .model-status.error {
+            background: rgba(244, 67, 54, 0.9);
+        }
     </style>
 </head>
 <body>
+    <!-- Model Status Indicator -->
+    <div id="modelStatus" class="model-status">Loading model...</div>
+
     <!-- Header -->
     <header>
         <nav class="container">
@@ -828,47 +857,342 @@
         </div>
     </footer>
 
+    <!-- TensorFlow.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    
     <script>
-        // ML Model Integration (Placeholder for .h5 model)
+        // ML Model Integration
         let model = null;
+        let modelLoaded = false;
+        const modelStatus = document.getElementById('modelStatus');
 
-        // Simulate model loading (Replace with actual TensorFlow.js loading)
+        // Update status indicator
+        function updateStatus(message, type) {
+            modelStatus.textContent = message;
+            modelStatus.className = 'model-status ' + type;
+            modelStatus.style.display = 'block';
+            setTimeout(() => {
+                if (type !== 'loading') {
+                    modelStatus.style.display = 'none';
+                }
+            }, 3000);
+        }
+
+        // Load the .h5 model (converted to TensorFlow.js format)
         async function loadModel() {
-            console.log('Loading anemia detection model...');
-            // Placeholder for actual model loading
-            // model = await tf.loadLayersModel('models/anemia_detection.h5');
-            // For now, we'll simulate the model
-            return new Promise(resolve => setTimeout(resolve, 1000));
+            try {
+                console.log('🔄 Loading anemia detection model...');
+                updateStatus('Loading AI Model...', 'loading');
+                
+                // Load your model from the models folder
+                // First convert your .h5 model using: tensorflowjs_converter --input_format keras model.h5 models/
+                model = await tf.loadLayersModel('models/model.json');
+                modelLoaded = true;
+                
+                console.log('✅ Model loaded successfully!');
+                console.log('📊 Model input shape:', model.inputs[0].shape);
+                console.log('📊 Model output shape:', model.outputs[0].shape);
+                
+                updateStatus('AI Model Ready!', 'ready');
+            } catch (error) {
+                console.error('❌ Error loading model:', error);
+                console.log('⚠️ Using fallback simulation mode');
+                modelLoaded = false;
+                updateStatus('Using Simulation Mode', 'error');
+            }
+        }
+
+        // Preprocess image for model input
+        async function preprocessImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    try {
+                        const img = new Image();
+                        img.onload = async function() {
+                            console.log('🖼️ Original image size:', img.width, 'x', img.height);
+                            
+                            // Create canvas to resize image
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            
+                            // IMPORTANT: Set these to match YOUR model's input dimensions
+                            const targetWidth = 224;  // Change this to your model's width
+                            const targetHeight = 224; // Change this to your model's height
+                            
+                            canvas.width = targetWidth;
+                            canvas.height = targetHeight;
+                            
+                            // Draw and resize image
+                            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+                            
+                            // Convert to tensor
+                            let tensor = tf.browser.fromPixels(canvas);
+                            console.log('📐 Tensor shape after fromPixels:', tensor.shape);
+                            
+                            // Normalize pixel values (0-255 to 0-1)
+                            // Adjust normalization if your model requires different preprocessing
+                            tensor = tensor.toFloat().div(tf.scalar(255.0));
+                            
+                            // Add batch dimension [1, height, width, channels]
+                            tensor = tensor.expandDims(0);
+                            
+                            console.log('✅ Preprocessed tensor shape:', tensor.shape);
+                            resolve(tensor);
+                        };
+                        img.onerror = () => reject(new Error('Failed to load image'));
+                        img.src = e.target.result;
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsDataURL(file);
+            });
         }
 
         // Image upload handler
         async function handleImageUpload(event) {
             const file = event.target.files[0];
-            if (!file) return;
+            if (!file) {
+                console.log('❌ No file selected');
+                return;
+            }
+
+            console.log('📁 File selected:', file.name, '(' + (file.size / 1024).toFixed(2) + ' KB)');
 
             const preview = document.getElementById('preview');
             const result = document.getElementById('result');
             const progressBar = document.getElementById('progressBar');
             const progressFill = document.getElementById('progressFill');
 
+            // Reset previous results
+            result.style.display = 'none';
+            result.innerHTML = '';
+
             // Show preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 preview.src = e.target.result;
                 preview.style.display = 'block';
+                console.log('✅ Image preview loaded');
             };
             reader.readAsDataURL(file);
 
-            // Show progress
+            // Show progress bar
             progressBar.style.display = 'block';
             progressFill.style.width = '0%';
 
-            // Simulate progress
+            // Animate progress
             for (let i = 0; i <= 100; i += 10) {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 progressFill.style.width = i + '%';
             }
 
-            // Simulate AI detection (Replace with actual model inference)
+            console.log('🔍 Starting analysis...');
+            
+            // Analyze image
             await analyzeImage(file);
         }
+
+        // Analyze image with ML model or simulation
+        async function analyzeImage(file) {
+            const result = document.getElementById('result');
+            
+            try {
+                console.log('🤖 Analyzing image...');
+                
+                let prediction;
+                
+                if (modelLoaded && model) {
+                    // ===== REAL MODEL PREDICTION =====
+                    console.log('✅ Using loaded ML model');
+                    
+                    // Preprocess the image
+                    const tensor = await preprocessImage(file);
+                    console.log('✅ Image preprocessed');
+                    
+                    // Run prediction
+                    console.log('🔮 Running model prediction...');
+                    const predictions = await model.predict(tensor);
+                    const predictionData = await predictions.array();
+                    
+                    console.log('📊 Raw model output:', predictionData);
+                    
+                    // Flatten the prediction array
+                    const flatPredictions = predictionData[0];
+                    console.log('📊 Flattened predictions:', flatPredictions);
+                    
+                    // Find the class with highest probability
+                    const maxProb = Math.max(...flatPredictions);
+                    const predictedClass = flatPredictions.indexOf(maxProb);
+                    const confidence = Math.round(maxProb * 100);
+                    
+                    console.log('✅ Predicted class:', predictedClass);
+                    console.log('✅ Confidence:', confidence + '%');
+                    
+                    // IMPORTANT: Adjust these arrays based on YOUR model's classes
+                    const statusMap = ['Healthy', 'Mild Anemia', 'Moderate Anemia', 'Severe Anemia'];
+                    const ironLevelMap = ['Normal', 'Low', 'Very Low', 'Critical'];
+                    const colorMap = ['#10b981', '#f59e0b', '#ef4444', '#dc2626'];
+                    const xpMap = [50, 40, 30, 20];
+                    const recommendations = [
+                        'Great job! Keep maintaining your iron-rich diet and healthy lifestyle.',
+                        'Consider increasing iron-rich foods and consult a healthcare provider for guidance.',
+                        'Please consult a doctor immediately for proper treatment and supplementation.',
+                        'Urgent: Please seek immediate medical attention for severe anemia treatment.'
+                    ];
+                    
+                    prediction = {
+                        status: statusMap[predictedClass] || 'Unknown',
+                        confidence: confidence,
+                        ironLevel: ironLevelMap[predictedClass] || 'Unknown',
+                        color: colorMap[predictedClass] || '#6b7280',
+                        recommendation: recommendations[predictedClass] || 'Please consult a healthcare provider.',
+                        xpGain: xpMap[predictedClass] || 25
+                    };
+                    
+                    // Clean up tensors to free memory
+                    tensor.dispose();
+                    predictions.dispose();
+                    
+                } else {
+                    // ===== FALLBACK SIMULATION =====
+                    console.log('⚠️ Model not loaded, using simulation');
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    const simulatedResults = [
+                        {
+                            status: 'Healthy',
+                            confidence: 92,
+                            ironLevel: 'Normal',
+                            color: '#10b981',
+                            recommendation: 'Great job! Keep maintaining your iron-rich diet and healthy lifestyle.',
+                            xpGain: 50
+                        },
+                        {
+                            status: 'Mild Anemia',
+                            confidence: 85,
+                            ironLevel: 'Low',
+                            color: '#f59e0b',
+                            recommendation: 'Consider increasing iron-rich foods and consult a healthcare provider for guidance.',
+                            xpGain: 30
+                        },
+                        {
+                            status: 'Moderate Anemia',
+                            confidence: 88,
+                            ironLevel: 'Very Low',
+                            color: '#ef4444',
+                            recommendation: 'Please consult a doctor immediately for proper treatment and supplementation.',
+                            xpGain: 20
+                        }
+                    ];
+                    
+                    prediction = simulatedResults[Math.floor(Math.random() * simulatedResults.length)];
+                }
+
+                // Display results
+                console.log('📋 Displaying results:', prediction);
+                result.style.display = 'block';
+                result.innerHTML = `
+                    <div style="text-align: center;">
+                        <h3 style="color: ${prediction.color}; font-size: 28px; margin-bottom: 20px;">
+                            ${prediction.status}
+                        </h3>
+                        <div style="background: ${prediction.color}22; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                            <div style="font-size: 48px; font-weight: bold; color: ${prediction.color};">
+                                ${prediction.confidence}%
+                            </div>
+                            <div style="color: #666; margin-top: 5px;">Confidence Level</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                                <div style="color: #667eea; font-weight: bold;">Iron Level</div>
+                                <div style="font-size: 20px; margin-top: 5px;">${prediction.ironLevel}</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                                <div style="color: #667eea; font-weight: bold;">XP Gained</div>
+                                <div style="font-size: 20px; margin-top: 5px;">+${prediction.xpGain} XP</div>
+                            </div>
+                        </div>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                            <strong>💡 Recommendation:</strong><br>
+                            ${prediction.recommendation}
+                        </div>
+                        <button onclick="viewRemedies()" style="margin-top: 20px; padding: 15px 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s;">
+                            View Natural Remedies
+                        </button>
+                    </div>
+                `;
+
+                console.log('✅ Analysis complete!');
+                
+            } catch (error) {
+                console.error('❌ Error during analysis:', error);
+                result.style.display = 'block';
+                result.innerHTML = `
+                    <div style="text-align: center; color: #ef4444; padding: 20px;">
+                        <h3 style="font-size: 24px; margin-bottom: 15px;">❌ Error</h3>
+                        <p>There was an error analyzing the image. Please try again.</p>
+                        <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: monospace;">${error.message}</p>
+                        <button onclick="location.reload()" style="margin-top: 20px; padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer;">
+                            Reload Page
+                        </button>
+                    </div>
+                `;
+            } finally {
+                // Hide progress bar
+                document.getElementById('progressBar').style.display = 'none';
+            }
+        }
+
+        function viewRemedies() {
+            document.getElementById('remedies').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Load model on page load
+        window.addEventListener('load', () => {
+            console.log('🚀 Page loaded, initializing...');
+            loadModel().then(() => {
+                console.log('✅ Initialization complete');
+            });
+        });
+
+        // Add floating animation to feature cards
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach((card, index) => {
+            card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+        });
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Log TensorFlow.js version
+        console.log('📦 TensorFlow.js version:', tf.version.tfjs);
+    </script>
+</body>
+</html>
