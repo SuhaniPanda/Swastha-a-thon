@@ -789,7 +789,7 @@
                 <div class="detection-demo">
                     <h3 style="color: #667eea; margin-bottom: 20px;">Try Detection Now</h3>
                     <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                        <input type="file" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
+                        <input type="file" id="fileInput" accept="image/*">
                         <div class="upload-icon">📷</div>
                         <p style="color: #667eea; font-size: 18px; font-weight: bold;">Click to upload image</p>
                         <p style="color: #999; margin-top: 10px;">Supports: JPG, PNG, HEIC</p>
@@ -797,7 +797,7 @@
                     <div class="progress-bar" id="progressBar">
                         <div class="progress-fill" id="progressFill"></div>
                     </div>
-                    <img id="preview" src="" alt="Preview">
+                    <img id="preview" src="" alt="Preview" style="display: none;">
                     <div id="result"></div>
                 </div>
             </div>
