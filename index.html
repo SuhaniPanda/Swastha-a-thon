@@ -24,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* Header */
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -79,7 +78,6 @@
             color: #667eea;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
             color: white;
@@ -169,7 +167,6 @@
             color: #667eea;
         }
 
-        /* Features Section */
         .features {
             background: white;
             padding: 80px 0;
@@ -217,7 +214,6 @@
             line-height: 1.6;
         }
 
-        /* AI Detection Section */
         .ai-detection {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -293,15 +289,8 @@
             background: linear-gradient(90deg, #667eea, #764ba2);
             width: 0%;
             transition: width 0.3s;
-            animation: shimmer 2s infinite;
         }
 
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* Game Preview Section */
         .game-preview {
             background: white;
             padding: 80px 0;
@@ -321,6 +310,7 @@
             color: white;
             text-align: center;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .game-screen:hover {
@@ -332,7 +322,6 @@
             margin-bottom: 20px;
         }
 
-        /* Leaderboard Section */
         .leaderboard {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -378,7 +367,6 @@
             color: #667eea;
         }
 
-        /* Natural Remedies Section */
         .remedies {
             background: white;
             padding: 80px 0;
@@ -426,7 +414,6 @@
             margin-right: 8px;
         }
 
-        /* Footer */
         footer {
             background: #2d3748;
             color: white;
@@ -470,26 +457,6 @@
             color: #cbd5e0;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .detection-container {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .leaderboard-row {
-                grid-template-columns: 60px 1fr 100px;
-                padding: 15px;
-            }
-        }
-
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -516,393 +483,7 @@
             opacity: 0.9;
         }
 
-        .model-status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            z-index: 9999;
-            display: none;
-        }
-
-        .model-status.loading {
-            background: rgba(255, 193, 7, 0.9);
-            color: #000;
-        }
-
-        .model-status.ready {
-            background: rgba(76, 175, 80, 0.9);
-        }
-
-        .model-status.error {
-            background: rgba(244, 67, 54, 0.9);
-        }
-
-        /* Avatar Modal */
-        .avatar-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .avatar-modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .avatar-modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 900px;
-            height: 85vh;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .avatar-modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .avatar-modal-header h2 {
-            font-size: 24px;
-            margin: 0;
-        }
-
-        .close-modal {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 28px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .avatar-iframe {
-            width: 100%;
-            height: calc(100% - 80px);
-            border: none;
-            border-radius: 0 0 20px 20px;
-        }
-
-        /* Game Container Styles */
-        .game-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 20px;
-        }
-
-        .quest-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .quest-item {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .quest-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .quest-item.completed {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            opacity: 0.7;
-        }
-
-        .quest-item.completed .quest-text {
-            text-decoration: line-through;
-        }
-
-        .quest-info {
-            flex: 1;
-        }
-
-        .quest-text {
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .quest-reward {
-            font-size: 14px;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .quest-checkbox {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 3px solid #667eea;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s;
-        }
-
-        .quest-item.completed .quest-checkbox {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Power-ups Game */
-        .powerup-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .powerup-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .powerup-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .powerup-card:hover::before {
-            opacity: 1;
-        }
-
-        .powerup-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .powerup-card.unlocked {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-
-        .powerup-card.locked {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-            cursor: not-allowed;
-        }
-
-        .powerup-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-        }
-
-        .powerup-name {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .powerup-level {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        /* Team Battle Game */
-        .team-battle {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 20px;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .team {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .team.player-team {
-            border: 3px solid #667eea;
-        }
-
-        .team.opponent-team {
-            border: 3px solid #ef4444;
-        }
-
-        .team-name {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .team-health {
-            background: #e5e7eb;
-            height: 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .team-health-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #059669);
-            transition: width 0.5s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .opponent-team .team-health-bar {
-            background: linear-gradient(90deg, #ef4444, #dc2626);
-        }
-
-        .battle-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .battle-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .battle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .battle-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        .vs-text {
-            font-size: 48px;
-            font-weight: bold;
-            color: #667eea;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .battle-log {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f9fafb;
-            border-radius: 10px;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .battle-log-item {
-            padding: 5px 0;
-            font-size: 14px;
-            color: #4b5563;
-        }
-
-        .stats-display {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-name {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        /* Chatbot Styles */
+        /* Chatbot */
         .chatbot-button {
             position: fixed;
             bottom: 30px;
@@ -927,12 +508,6 @@
 
         .chatbot-button-icon {
             font-size: 28px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .chatbot-container {
@@ -947,18 +522,6 @@
             display: none;
             flex-direction: column;
             z-index: 9998;
-            animation: slideUpChat 0.3s ease-out;
-        }
-
-        @keyframes slideUpChat {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .chatbot-container.active {
@@ -975,33 +538,12 @@
             align-items: center;
         }
 
-        .chatbot-header h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .chatbot-status {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
         .chatbot-close {
             background: none;
             border: none;
             color: white;
             font-size: 24px;
             cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .chatbot-close:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .chatbot-messages {
@@ -1031,45 +573,23 @@
             border-radius: 18px;
             font-size: 14px;
             line-height: 1.5;
-            animation: messageAppear 0.3s ease-out;
-        }
-
-        @keyframes messageAppear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .chat-message.bot .message-bubble {
             background: white;
             color: #333;
-            border-bottom-left-radius: 4px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .chat-message.user .message-bubble {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: #999;
-            margin-top: 4px;
-            padding: 0 8px;
         }
 
         .chatbot-input-area {
             padding: 15px;
             background: white;
             border-radius: 0 0 20px 20px;
-            border-top: 1px solid #e5e7eb;
         }
 
         .chatbot-input-container {
@@ -1082,13 +602,7 @@
             padding: 12px 16px;
             border: 2px solid #e5e7eb;
             border-radius: 25px;
-            font-size: 14px;
             outline: none;
-            transition: all 0.3s;
-        }
-
-        .chatbot-input:focus {
-            border-color: #667eea;
         }
 
         .chatbot-send {
@@ -1098,49 +612,7 @@
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chatbot-send:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .chatbot-send:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 12px 16px;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #667eea;
-            border-radius: 50%;
-            animation: typingDot 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typingDot {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
-            30% { transform: translateY(-10px); opacity: 1; }
         }
 
         .quick-replies {
@@ -1158,7 +630,6 @@
             border-radius: 20px;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .quick-reply-btn:hover {
@@ -1167,134 +638,57 @@
         }
 
         @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .detection-container { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+            .leaderboard-row { grid-template-columns: 60px 1fr 100px; }
             .chatbot-container {
                 width: calc(100% - 20px);
                 right: 10px;
                 left: 10px;
-                height: 500px;
-            }
-
-            .chatbot-button {
-                bottom: 20px;
-                right: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Avatar Modal -->
-    <div id="avatarModal" class="avatar-modal">
-        <div class="avatar-modal-content">
-            <div class="avatar-modal-header">
-                <h2>⚔️ Create Your Warrior Avatar</h2>
-                <button class="close-modal" onclick="closeAvatarModal()">×</button>
-            </div>
-            <iframe 
-                id="avatarFrame" 
-                class="avatar-iframe" 
-                src="https://demo.readyplayer.me/avatar"
-                allow="camera *; microphone *"
-            ></iframe>
-        </div>
+    <!-- Chatbot -->
+    <div class="chatbot-button" onclick="toggleChatbot()">
+        <div class="chatbot-button-icon">💬</div>
     </div>
 
-    <!-- Quest Modal -->
-    <div id="questModal" class="avatar-modal">
-        <div class="avatar-modal-content">
-            <div class="avatar-modal-header">
-                <h2>🗺️ Daily Quest System</h2>
-                <button class="close-modal" onclick="closeQuestModal()">×</button>
+    <div id="chatbotContainer" class="chatbot-container">
+        <div class="chatbot-header">
+            <div>
+                <h3>🩺 IronQuest Assistant</h3>
             </div>
-            <div class="game-container">
-                <div class="stats-display">
-                    <div class="stat-box">
-                        <div class="stat-value" id="questXP">0</div>
-                        <div class="stat-name">Total XP</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="questCompleted">0</div>
-                        <div class="stat-name">Completed</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="questStreak">0</div>
-                        <div class="stat-name">Day Streak</div>
-                    </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-bubble">
+                    Hi! I'm your IronQuest health assistant! 👋 How can I help you today?
                 </div>
-                <div class="quest-list" id="questList"></div>
+            </div>
+            <div class="quick-replies">
+                <button class="quick-reply-btn" onclick="sendQuickReply('What is anemia?')">What is anemia?</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('Iron-rich foods')">Iron-rich foods</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('How to use AI detection')">AI Detection</button>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="chatbot-input-container">
+                <input 
+                    type="text" 
+                    class="chatbot-input" 
+                    id="chatInput" 
+                    placeholder="Ask me anything..."
+                    onkeypress="if(event.key==='Enter') sendMessage()"
+                >
+                <button class="chatbot-send" onclick="sendMessage()">➤</button>
             </div>
         </div>
     </div>
 
-    <!-- Power-up Modal -->
-    <div id="powerupModal" class="avatar-modal">
-        <div class="avatar-modal-content">
-            <div class="avatar-modal-header">
-                <h2>⚡ Power-Up Collection</h2>
-                <button class="close-modal" onclick="closePowerupModal()">×</button>
-            </div>
-            <div class="game-container">
-                <div class="stats-display">
-                    <div class="stat-box">
-                        <div class="stat-value" id="ironLevel">65</div>
-                        <div class="stat-name">Iron Level</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="powerCount">0</div>
-                        <div class="stat-name">Powers Unlocked</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="powerStrength">1.0x</div>
-                        <div class="stat-name">Total Strength</div>
-                    </div>
-                </div>
-                <div class="powerup-grid" id="powerupGrid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Battle Modal -->
-    <div id="battleModal" class="avatar-modal">
-        <div class="avatar-modal-content">
-            <div class="avatar-modal-header">
-                <h2>👥 Team Battle Arena</h2>
-                <button class="close-modal" onclick="closeBattleModal()">×</button>
-            </div>
-            <div class="game-container">
-                <div class="team-battle">
-                    <div class="team player-team">
-                        <div class="team-name">🛡️ Your Team</div>
-                        <div class="team-health">
-                            <div class="team-health-bar" id="playerHealth" style="width: 100%;">100 HP</div>
-                        </div>
-                        <div class="battle-actions">
-                            <button class="battle-btn" onclick="battleAttack()">⚔️ Attack</button>
-                            <button class="battle-btn" onclick="battleDefend()">🛡️ Defend</button>
-                            <button class="battle-btn" onclick="battleHeal()">💚 Heal</button>
-                        </div>
-                    </div>
-                    <div class="vs-text">VS</div>
-                    <div class="team opponent-team">
-                        <div class="team-name">⚔️ Rival School</div>
-                        <div class="team-health">
-                            <div class="team-health-bar" id="opponentHealth" style="width: 100%;">100 HP</div>
-                        </div>
-                        <div style="padding: 20px; text-align: center; color: #666;">
-                            <p>🏫 Ryan International</p>
-                            <p style="font-size: 14px; margin-top: 5px;">Delhi Branch</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="battle-log" id="battleLog">
-                    <div class="battle-log-item">⚔️ Battle started! Choose your action wisely.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Model Status Indicator -->
-    <div id="modelStatus" class="model-status">Loading model...</div>
-
-    <!-- Header -->
     <header>
         <nav class="container">
             <div class="logo">
@@ -1312,7 +706,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <h1>⚔️ IronQuest</h1>
@@ -1341,46 +734,44 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">🎮 Epic Features</h2>
             <div class="features-grid">
-                <div class="feature-card" onclick="scrollToSection('detection')">
+                <div class="feature-card" onclick="document.getElementById('detection').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">🤖</div>
                     <h3>AI-Powered Detection</h3>
-                    <p>Upload images of eyes, nails, or palms for instant anemia detection using advanced computer vision and machine learning models.</p>
+                    <p>Upload images of eyes, nails, or palms for instant anemia detection using advanced computer vision.</p>
                 </div>
-                <div class="feature-card" onclick="scrollToSection('game')">
+                <div class="feature-card" onclick="document.getElementById('game').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">⚔️</div>
                     <h3>Interactive Gameplay</h3>
                     <p>Your real iron levels directly power your character's strength. Higher iron = stronger warrior!</p>
                 </div>
-                <div class="feature-card" onclick="scrollToSection('leaderboard')">
+                <div class="feature-card" onclick="document.getElementById('leaderboard').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">🏆</div>
                     <h3>School Competitions</h3>
                     <p>Compete with peers across schools and districts. Lead your team to victory through healthy habits!</p>
                 </div>
-                <div class="feature-card" onclick="scrollToSection('remedies')">
+                <div class="feature-card" onclick="document.getElementById('remedies').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">🍎</div>
                     <h3>Recipe Challenges</h3>
                     <p>Discover iron-rich food recipes using local ingredients. Complete cooking quests for bonus XP!</p>
                 </div>
-                <div class="feature-card" onclick="scrollToSection('game')">
+                <div class="feature-card" onclick="document.getElementById('game').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">🎖️</div>
                     <h3>Achievement Badges</h3>
                     <p>Earn legendary badges for consistent supplementation, tracking, and healthy lifestyle choices.</p>
                 </div>
-                <div class="feature-card" onclick="scrollToSection('remedies')">
+                <div class="feature-card" onclick="document.getElementById('remedies').scrollIntoView({behavior:'smooth'})">
                     <div class="feature-icon">🌿</div>
                     <h3>Natural Remedies</h3>
-                    <p>Access personalized natural remedy recommendations based on your detection results and progress.</p>
+                    <p>Access personalized natural remedy recommendations based on your detection results.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Detection Section -->
     <section id="detection" class="ai-detection">
         <div class="container">
             <h2 class="section-title">🤖 AI Anemia Detection</h2>
@@ -1413,41 +804,35 @@
         </div>
     </section>
 
-    <!-- Game Preview Section -->
     <section id="game" class="game-preview">
         <div class="container">
             <h2 class="section-title">🎮 Game Experience</h2>
             <p style="text-align: center; font-size: 20px; margin-bottom: 40px; color: #666;">Your health journey becomes an epic adventure</p>
             <div class="game-screens">
-                <div class="game-screen" onclick="openAvatarModal()" style="cursor: pointer;">
+                <div class="game-screen">
                     <div class="game-screen-icon">⚔️</div>
                     <h3>Character Growth</h3>
                     <p>Your warrior grows stronger with each supplement taken and healthy meal consumed</p>
-                    <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Click to create your avatar!</p>
                 </div>
-                <div class="game-screen" onclick="openQuestModal()" style="cursor: pointer;">
+                <div class="game-screen">
                     <div class="game-screen-icon">🗺️</div>
                     <h3>Quest System</h3>
                     <p>Complete daily missions: take supplements, eat iron-rich foods, track progress</p>
-                    <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Click to view quests!</p>
                 </div>
-                <div class="game-screen" onclick="openPowerupModal()" style="cursor: pointer;">
+                <div class="game-screen">
                     <div class="game-screen-icon">⚡</div>
                     <h3>Power-Ups</h3>
                     <p>Unlock special abilities as your iron levels improve and consistency grows</p>
-                    <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Click to unlock powers!</p>
                 </div>
-                <div class="game-screen" onclick="openBattleModal()" style="cursor: pointer;">
+                <div class="game-screen">
                     <div class="game-screen-icon">👥</div>
                     <h3>Team Battles</h3>
                     <p>Join forces with classmates to compete against other schools in epic tournaments</p>
-                    <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Click to battle!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Leaderboard Section -->
     <section id="leaderboard" class="leaderboard">
         <div class="container">
             <h2 class="section-title">🏆 Global Leaderboard</h2>
@@ -1496,7 +881,6 @@
         </div>
     </section>
 
-    <!-- Natural Remedies Section -->
     <section id="remedies" class="remedies">
         <div class="container">
             <h2 class="section-title">🌿 Natural Iron-Rich Remedies</h2>
@@ -1507,757 +891,4 @@
                     <ul>
                         <li>Spinach (palak)</li>
                         <li>Fenugreek leaves (methi)</li>
-                        <li>Amaranth leaves (chaulai)</li>
-                        <li>Curry leaves</li>
-                        <li>Moringa leaves (drumstick)</li>
-                    </ul>
-                </div>
-                <div class="remedy-card">
-                    <h4>🫘 Legume Legends</h4>
-                    <ul>
-                        <li>Masoor dal (red lentils)</li>
-                        <li>Chickpeas (chana)</li>
-                        <li>Kidney beans (rajma)</li>
-                        <li>Soybeans</li>
-                        <li>Black gram (urad dal)</li>
-                    </ul>
-                </div>
-                <div class="remedy-card">
-                    <h4>🌰 Seeds & Nuts</h4>
-                    <ul>
-                        <li>Pumpkin seeds</li>
-                        <li>Sesame seeds (til)</li>
-                        <li>Cashews</li>
-                        <li>Almonds</li>
-                        <li>Groundnuts</li>
-                    </ul>
-                </div>
-                <div class="remedy-card">
-                    <h4>🍇 Fruits & More</h4>
-                    <ul>
-                        <li>Pomegranate (anar)</li>
-                        <li>Dates (khajoor)</li>
-                        <li>Beetroot</li>
-                        <li>Jaggery (gur)</li>
-                        <li>Dried apricots</li>
-                    </ul>
-                </div>
-                <div class="remedy-card">
-                    <h4>🥘 Traditional Recipes</h4>
-                    <ul>
-                        <li>Palak paneer</li>
-                        <li>Dal tadka</li>
-                        <li>Beetroot halwa</li>
-                        <li>Til ki chikki</li>
-                        <li>Moringa curry</li>
-                    </ul>
-                </div>
-                <div class="remedy-card">
-                    <h4>☕ Herbal Boosters</h4>
-                    <ul>
-                        <li>Nettle tea</li>
-                        <li>Amla juice (Vitamin C)</li>
-                        <li>Turmeric milk</li>
-                        <li>Ashwagandha</li>
-                        <li>Spirulina powder</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>IronQuest</h3>
-                    <p style="color: #cbd5e0; line-height: 1.8;">Empowering adolescents to combat anemia through gamification, AI technology, and natural remedies.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#detection">AI Detection</a></li>
-                        <li><a href="#game">Game</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">About Anemia</a></li>
-                        <li><a href="#">Health Tips</a></li>
-                        <li><a href="#">Recipe Database</a></li>
-                        <li><a href="#">Research Papers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul>
-                        <li><a href="#">support@ironquest.app</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 IronQuest. All rights reserved. Made with ❤️ for adolescent health.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- TensorFlow.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
-    
-    <script>
-        // ML Model Integration
-        let model = null;
-        let modelLoaded = false;
-        const modelStatus = document.getElementById('modelStatus');
-
-        // Update status indicator
-        function updateStatus(message, type) {
-            modelStatus.textContent = message;
-            modelStatus.className = 'model-status ' + type;
-            modelStatus.style.display = 'block';
-            setTimeout(() => {
-                if (type !== 'loading') {
-                    modelStatus.style.display = 'none';
-                }
-            }, 3000);
-        }
-
-        // Load the .h5 model (converted to TensorFlow.js format)
-        async function loadModel() {
-            try {
-                console.log('🔄 Loading anemia detection model...');
-                updateStatus('Loading AI Model...', 'loading');
-                
-                // Load your model from the models folder
-                // First convert your .h5 model using: tensorflowjs_converter --input_format keras model.h5 models/
-                model = await tf.loadLayersModel('models/model.json');
-                modelLoaded = true;
-                
-                console.log('✅ Model loaded successfully!');
-                console.log('📊 Model input shape:', model.inputs[0].shape);
-                console.log('📊 Model output shape:', model.outputs[0].shape);
-                
-                updateStatus('AI Model Ready!', 'ready');
-            } catch (error) {
-                console.error('❌ Error loading model:', error);
-                console.log('⚠️ Using fallback simulation mode');
-                modelLoaded = false;
-                updateStatus('Using Simulation Mode', 'error');
-            }
-        }
-
-        // Preprocess image for model input
-        async function preprocessImage(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    try {
-                        const img = new Image();
-                        img.onload = async function() {
-                            console.log('🖼️ Original image size:', img.width, 'x', img.height);
-                            
-                            // Create canvas to resize image
-                            const canvas = document.createElement('canvas');
-                            const ctx = canvas.getContext('2d');
-                            
-                            // IMPORTANT: Set these to match YOUR model's input dimensions
-                            const targetWidth = 224;  // Change this to your model's width
-                            const targetHeight = 224; // Change this to your model's height
-                            
-                            canvas.width = targetWidth;
-                            canvas.height = targetHeight;
-                            
-                            // Draw and resize image
-                            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
-                            
-                            // Convert to tensor
-                            let tensor = tf.browser.fromPixels(canvas);
-                            console.log('📐 Tensor shape after fromPixels:', tensor.shape);
-                            
-                            // Normalize pixel values (0-255 to 0-1)
-                            // Adjust normalization if your model requires different preprocessing
-                            tensor = tensor.toFloat().div(tf.scalar(255.0));
-                            
-                            // Add batch dimension [1, height, width, channels]
-                            tensor = tensor.expandDims(0);
-                            
-                            console.log('✅ Preprocessed tensor shape:', tensor.shape);
-                            resolve(tensor);
-                        };
-                        img.onerror = () => reject(new Error('Failed to load image'));
-                        img.src = e.target.result;
-                    } catch (error) {
-                        reject(error);
-                    }
-                };
-                reader.onerror = () => reject(new Error('Failed to read file'));
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // Image upload handler
-        async function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (!file) {
-                console.log('❌ No file selected');
-                return;
-            }
-
-            console.log('📁 File selected:', file.name, '(' + (file.size / 1024).toFixed(2) + ' KB)');
-
-            const preview = document.getElementById('preview');
-            const result = document.getElementById('result');
-            const progressBar = document.getElementById('progressBar');
-            const progressFill = document.getElementById('progressFill');
-
-            // Reset previous results
-            result.style.display = 'none';
-            result.innerHTML = '';
-
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                console.log('✅ Image preview loaded');
-            };
-            reader.readAsDataURL(file);
-
-            // Show progress bar
-            progressBar.style.display = 'block';
-            progressFill.style.width = '0%';
-
-            // Animate progress
-            for (let i = 0; i <= 100; i += 10) {
-                await new Promise(resolve => setTimeout(resolve, 100));
-                progressFill.style.width = i + '%';
-            }
-
-            console.log('🔍 Starting analysis...');
-            
-            // Analyze image
-            await analyzeImage(file);
-        }
-
-        // Analyze image with ML model or simulation
-        async function analyzeImage(file) {
-            const result = document.getElementById('result');
-            
-            try {
-                console.log('🤖 Analyzing image...');
-                
-                let prediction;
-                
-                if (modelLoaded && model) {
-                    // ===== REAL MODEL PREDICTION =====
-                    console.log('✅ Using loaded ML model');
-                    
-                    // Preprocess the image
-                    const tensor = await preprocessImage(file);
-                    console.log('✅ Image preprocessed');
-                    
-                    // Run prediction
-                    console.log('🔮 Running model prediction...');
-                    const predictions = await model.predict(tensor);
-                    const predictionData = await predictions.array();
-                    
-                    console.log('📊 Raw model output:', predictionData);
-                    
-                    // Flatten the prediction array
-                    const flatPredictions = predictionData[0];
-                    console.log('📊 Flattened predictions:', flatPredictions);
-                    
-                    // Find the class with highest probability
-                    const maxProb = Math.max(...flatPredictions);
-                    const predictedClass = flatPredictions.indexOf(maxProb);
-                    const confidence = Math.round(maxProb * 100);
-                    
-                    console.log('✅ Predicted class:', predictedClass);
-                    console.log('✅ Confidence:', confidence + '%');
-                    
-                    // IMPORTANT: Adjust these arrays based on YOUR model's classes
-                    const statusMap = ['Healthy', 'Mild Anemia', 'Moderate Anemia', 'Severe Anemia'];
-                    const ironLevelMap = ['Normal', 'Low', 'Very Low', 'Critical'];
-                    const colorMap = ['#10b981', '#f59e0b', '#ef4444', '#dc2626'];
-                    const xpMap = [50, 40, 30, 20];
-                    const recommendations = [
-                        'Great job! Keep maintaining your iron-rich diet and healthy lifestyle.',
-                        'Consider increasing iron-rich foods and consult a healthcare provider for guidance.',
-                        'Please consult a doctor immediately for proper treatment and supplementation.',
-                        'Urgent: Please seek immediate medical attention for severe anemia treatment.'
-                    ];
-                    
-                    prediction = {
-                        status: statusMap[predictedClass] || 'Unknown',
-                        confidence: confidence,
-                        ironLevel: ironLevelMap[predictedClass] || 'Unknown',
-                        color: colorMap[predictedClass] || '#6b7280',
-                        recommendation: recommendations[predictedClass] || 'Please consult a healthcare provider.',
-                        xpGain: xpMap[predictedClass] || 25
-                    };
-                    
-                    // Clean up tensors to free memory
-                    tensor.dispose();
-                    predictions.dispose();
-                    
-                } else {
-                    // ===== FALLBACK SIMULATION =====
-                    console.log('⚠️ Model not loaded, using simulation');
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-                    
-                    const simulatedResults = [
-                        {
-                            status: 'Healthy',
-                            confidence: 92,
-                            ironLevel: 'Normal',
-                            color: '#10b981',
-                            recommendation: 'Great job! Keep maintaining your iron-rich diet and healthy lifestyle.',
-                            xpGain: 50
-                        },
-                        {
-                            status: 'Mild Anemia',
-                            confidence: 85,
-                            ironLevel: 'Low',
-                            color: '#f59e0b',
-                            recommendation: 'Consider increasing iron-rich foods and consult a healthcare provider for guidance.',
-                            xpGain: 30
-                        },
-                        {
-                            status: 'Moderate Anemia',
-                            confidence: 88,
-                            ironLevel: 'Very Low',
-                            color: '#ef4444',
-                            recommendation: 'Please consult a doctor immediately for proper treatment and supplementation.',
-                            xpGain: 20
-                        }
-                    ];
-                    
-                    prediction = simulatedResults[Math.floor(Math.random() * simulatedResults.length)];
-                }
-
-                // Display results
-                console.log('📋 Displaying results:', prediction);
-                result.style.display = 'block';
-                result.innerHTML = `
-                    <div style="text-align: center;">
-                        <h3 style="color: ${prediction.color}; font-size: 28px; margin-bottom: 20px; font-weight: bold;">
-                            ${prediction.status}
-                        </h3>
-                        <div style="background: ${prediction.color}22; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                            <div style="font-size: 48px; font-weight: bold; color: ${prediction.color};">
-                                ${prediction.confidence}%
-                            </div>
-                            <div style="color: #333; margin-top: 5px; font-weight: 600;">Confidence Level</div>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border: 2px solid #667eea;">
-                                <div style="color: #667eea; font-weight: bold; font-size: 16px;">Iron Level</div>
-                                <div style="font-size: 22px; margin-top: 8px; color: #1a202c; font-weight: bold;">${prediction.ironLevel}</div>
-                            </div>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border: 2px solid #667eea;">
-                                <div style="color: #667eea; font-weight: bold; font-size: 16px;">XP Gained</div>
-                                <div style="font-size: 22px; margin-top: 8px; color: #1a202c; font-weight: bold;">+${prediction.xpGain} XP</div>
-                            </div>
-                        </div>
-                        <div style="background: #fff3cd; padding: 18px; border-radius: 10px; border-left: 5px solid #ffc107; border: 2px solid #ffc107;">
-                            <strong style="color: #1a202c; font-size: 17px;">💡 Recommendation:</strong><br>
-                            <span style="color: #1a202c; font-size: 15px; line-height: 1.6; display: block; margin-top: 8px;">${prediction.recommendation}</span>
-                        </div>
-                        <button onclick="viewRemedies()" style="margin-top: 20px; padding: 15px 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
-                            View Natural Remedies
-                        </button>
-                    </div>
-                `;
-
-                console.log('✅ Analysis complete!');
-                
-            } catch (error) {
-                console.error('❌ Error during analysis:', error);
-                result.style.display = 'block';
-                result.innerHTML = `
-                    <div style="text-align: center; color: #ef4444; padding: 20px;">
-                        <h3 style="font-size: 24px; margin-bottom: 15px;">❌ Error</h3>
-                        <p>There was an error analyzing the image. Please try again.</p>
-                        <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: monospace;">${error.message}</p>
-                        <button onclick="location.reload()" style="margin-top: 20px; padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 20px; cursor: pointer;">
-                            Reload Page
-                        </button>
-                    </div>
-                `;
-            } finally {
-                // Hide progress bar
-                document.getElementById('progressBar').style.display = 'none';
-            }
-        }
-
-        function viewRemedies() {
-            document.getElementById('remedies').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Avatar Modal Functions
-        function openAvatarModal() {
-            const modal = document.getElementById('avatarModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeAvatarModal() {
-            const modal = document.getElementById('avatarModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('avatarModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAvatarModal();
-            }
-        });
-
-        // Listen for avatar creation completion
-        window.addEventListener('message', function(event) {
-            if (event.data === 'avatar-created') {
-                console.log('✅ Avatar created successfully!');
-                // You can add additional logic here, like saving the avatar URL
-            }
-        });
-
-        // Quest System Game
-        const quests = [
-            { id: 1, text: "Take your iron supplement", reward: 50, completed: false },
-            { id: 2, text: "Eat a spinach-based meal", reward: 30, completed: false },
-            { id: 3, text: "Drink a glass of pomegranate juice", reward: 25, completed: false },
-            { id: 4, text: "Complete 30 minutes of exercise", reward: 40, completed: false },
-            { id: 5, text: "Track your iron intake", reward: 20, completed: false },
-            { id: 6, text: "Get 8 hours of sleep", reward: 35, completed: false }
-        ];
-
-        let totalQuestXP = 0;
-        let completedQuests = 0;
-        let questStreak = 7;
-
-        function openQuestModal() {
-            document.getElementById('questModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            renderQuests();
-        }
-
-        function closeQuestModal() {
-            document.getElementById('questModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function renderQuests() {
-            const questList = document.getElementById('questList');
-            questList.innerHTML = quests.map(quest => `
-                <div class="quest-item ${quest.completed ? 'completed' : ''}" onclick="toggleQuest(${quest.id})">
-                    <div class="quest-info">
-                        <div class="quest-text">${quest.text}</div>
-                        <div class="quest-reward">+${quest.reward} XP</div>
-                    </div>
-                    <div class="quest-checkbox">${quest.completed ? '✓' : ''}</div>
-                </div>
-            `).join('');
-
-            document.getElementById('questXP').textContent = totalQuestXP;
-            document.getElementById('questCompleted').textContent = completedQuests;
-            document.getElementById('questStreak').textContent = questStreak;
-        }
-
-        function toggleQuest(questId) {
-            const quest = quests.find(q => q.id === questId);
-            if (quest && !quest.completed) {
-                quest.completed = true;
-                totalQuestXP += quest.reward;
-                completedQuests++;
-                renderQuests();
-                
-                // Celebration effect
-                const celebration = document.createElement('div');
-                celebration.textContent = `+${quest.reward} XP! 🎉`;
-                celebration.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; font-weight: bold; color: #667eea; z-index: 20000; animation: celebrationPop 1s ease-out forwards;';
-                document.body.appendChild(celebration);
-                setTimeout(() => celebration.remove(), 1000);
-            }
-        }
-
-        // Power-up System Game
-        const powerups = [
-            { id: 1, name: "Iron Boost", icon: "💪", level: 1, unlocked: true, strength: 1.2 },
-            { id: 2, name: "Energy Shield", icon: "🛡️", level: 1, unlocked: true, strength: 1.15 },
-            { id: 3, name: "Rapid Recovery", icon: "⚡", level: 1, unlocked: false, strength: 1.3 },
-            { id: 4, name: "Health Surge", icon: "💚", level: 1, unlocked: false, strength: 1.25 },
-            { id: 5, name: "Power Strike", icon: "🔥", level: 1, unlocked: false, strength: 1.4 },
-            { id: 6, name: "Ultimate Form", icon: "⭐", level: 1, unlocked: false, strength: 2.0 }
-        ];
-
-        let currentIronLevel = 65;
-
-        function openPowerupModal() {
-            document.getElementById('powerupModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            renderPowerups();
-        }
-
-        function closePowerupModal() {
-            document.getElementById('powerupModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function renderPowerups() {
-            const powerupGrid = document.getElementById('powerupGrid');
-            const unlockedCount = powerups.filter(p => p.unlocked).length;
-            const totalStrength = powerups.filter(p => p.unlocked).reduce((sum, p) => sum + p.strength - 1, 0) + 1;
-
-            powerupGrid.innerHTML = powerups.map(power => `
-                <div class="powerup-card ${power.unlocked ? 'unlocked' : 'locked'}" onclick="togglePowerup(${power.id})">
-                    <div class="powerup-icon">${power.unlocked ? power.icon : '🔒'}</div>
-                    <div class="powerup-name">${power.unlocked ? power.name : '???'}</div>
-                    <div class="powerup-level">${power.unlocked ? `Level ${power.level}` : 'Locked'}</div>
-                    <div class="powerup-level">${power.unlocked ? `+${((power.strength - 1) * 100).toFixed(0)}% Strength` : `Iron: ${power.id * 15}+`}</div>
-                </div>
-            `).join('');
-
-            document.getElementById('ironLevel').textContent = currentIronLevel;
-            document.getElementById('powerCount').textContent = unlockedCount;
-            document.getElementById('powerStrength').textContent = totalStrength.toFixed(1) + 'x';
-        }
-
-        function togglePowerup(powerId) {
-            const power = powerups.find(p => p.id === powerId);
-            if (power && !power.unlocked && currentIronLevel >= powerId * 15) {
-                power.unlocked = true;
-                currentIronLevel += 5;
-                renderPowerups();
-                
-                const celebration = document.createElement('div');
-                celebration.textContent = `${power.icon} ${power.name} Unlocked! 🎉`;
-                celebration.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px; font-weight: bold; color: #667eea; z-index: 20000; animation: celebrationPop 1.5s ease-out forwards; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);';
-                document.body.appendChild(celebration);
-                setTimeout(() => celebration.remove(), 1500);
-            }
-        }
-
-        // Team Battle Game
-        let playerHP = 100;
-        let opponentHP = 100;
-        let isDefending = false;
-        let battleInProgress = true;
-
-        function openBattleModal() {
-            document.getElementById('battleModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            resetBattle();
-        }
-
-        function closeBattleModal() {
-            document.getElementById('battleModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function resetBattle() {
-            playerHP = 100;
-            opponentHP = 100;
-            isDefending = false;
-            battleInProgress = true;
-            updateBattleUI();
-            document.getElementById('battleLog').innerHTML = '<div class="battle-log-item">⚔️ Battle started! Choose your action wisely.</div>';
-        }
-
-        function updateBattleUI() {
-            const playerBar = document.getElementById('playerHealth');
-            const opponentBar = document.getElementById('opponentHealth');
-            
-            playerBar.style.width = Math.max(0, playerHP) + '%';
-            playerBar.textContent = Math.max(0, playerHP) + ' HP';
-            
-            opponentBar.style.width = Math.max(0, opponentHP) + '%';
-            opponentBar.textContent = Math.max(0, opponentHP) + ' HP';
-        }
-
-        function addBattleLog(message) {
-            const log = document.getElementById('battleLog');
-            const item = document.createElement('div');
-            item.className = 'battle-log-item';
-            item.textContent = message;
-            log.appendChild(item);
-            log.scrollTop = log.scrollHeight;
-        }
-
-        function battleAttack() {
-            if (!battleInProgress) return;
-            
-            const damage = Math.floor(Math.random() * 20) + 10;
-            opponentHP -= damage;
-            addBattleLog(`⚔️ You attacked! Dealt ${damage} damage!`);
-            
-            setTimeout(() => {
-                if (opponentHP > 0) {
-                    opponentTurn();
-                } else {
-                    endBattle(true);
-                }
-            }, 500);
-            
-            updateBattleUI();
-        }
-
-        function battleDefend() {
-            if (!battleInProgress) return;
-            
-            isDefending = true;
-            addBattleLog(`🛡️ You're defending! Damage reduced by 50%!`);
-            
-            setTimeout(() => {
-                opponentTurn();
-                isDefending = false;
-            }, 500);
-        }
-
-        function battleHeal() {
-            if (!battleInProgress) return;
-            
-            const heal = Math.floor(Math.random() * 15) + 10;
-            playerHP = Math.min(100, playerHP + heal);
-            addBattleLog(`💚 You healed ${heal} HP!`);
-            
-            setTimeout(() => {
-                if (opponentHP > 0) {
-                    opponentTurn();
-                }
-            }, 500);
-            
-            updateBattleUI();
-        }
-
-        function opponentTurn() {
-            if (!battleInProgress) return;
-            
-            const action = Math.random();
-            let damage = Math.floor(Math.random() * 18) + 8;
-            
-            if (isDefending) {
-                damage = Math.floor(damage / 2);
-            }
-            
-            if (action < 0.7) {
-                playerHP -= damage;
-                addBattleLog(`💥 Opponent attacked! You took ${damage} damage!`);
-            } else if (action < 0.9) {
-                const heal = Math.floor(Math.random() * 12) + 8;
-                opponentHP = Math.min(100, opponentHP + heal);
-                addBattleLog(`✨ Opponent healed ${heal} HP!`);
-            } else {
-                addBattleLog(`🛡️ Opponent is defending!`);
-            }
-            
-            updateBattleUI();
-            
-            if (playerHP <= 0) {
-                endBattle(false);
-            }
-        }
-
-        function endBattle(playerWon) {
-            battleInProgress = false;
-            
-            if (playerWon) {
-                addBattleLog(`🎉 VICTORY! You defeated the rival school! +100 XP`);
-                totalQuestXP += 100;
-            } else {
-                addBattleLog(`💀 DEFEAT! Better luck next time! Keep improving your iron levels!`);
-            }
-            
-            setTimeout(() => {
-                if (confirm(playerWon ? 'You won! Play again?' : 'You lost! Try again?')) {
-                    resetBattle();
-                }
-            }, 1000);
-        }
-
-        // Add celebration animation style
-        const celebrationStyle = document.createElement('style');
-        celebrationStyle.textContent = `
-            @keyframes celebrationPop {
-                0% {
-                    transform: translate(-50%, -50%) scale(0);
-                    opacity: 0;
-                }
-                50% {
-                    transform: translate(-50%, -50%) scale(1.2);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translate(-50%, -50%) scale(0.8);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(celebrationStyle);
-
-        // Close modals when clicking outside
-        document.getElementById('questModal').addEventListener('click', function(e) {
-            if (e.target === this) closeQuestModal();
-        });
-
-        document.getElementById('powerupModal').addEventListener('click', function(e) {
-            if (e.target === this) closePowerupModal();
-        });
-
-        document.getElementById('battleModal').addEventListener('click', function(e) {
-            if (e.target === this) closeBattleModal();
-        });
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Load model on page load
-        window.addEventListener('load', () => {
-            console.log('🚀 Page loaded, initializing...');
-            loadModel().then(() => {
-                console.log('✅ Initialization complete');
-            });
-        });
-
-        // Add floating animation to feature cards
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach((card, index) => {
-            card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
-        });
-
-        // Add fade-in animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Log TensorFlow.js version
-        console.log('📦 TensorFlow.js version:', tf.version.tfjs);
-    </script>
-</body>
-</html>
+                        <li>Amaranth leaves (chaulai
