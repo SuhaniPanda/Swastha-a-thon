@@ -1830,6 +1830,15 @@
     if (msg.includes('ai') || msg.includes('model') || msg.includes('detect')) {
         return "The AI detection tool analyzes images of eyes, nails, or palms using a deep learning model to identify anemia signs with about 95% accuracy.";
     }
+        if (msg.includes('tired')) {
+  return "Feeling tired often can be a sign of low iron. Try including beetroot, spinach, or lentils — they’ll help you feel more energetic!";
+    }
+    if (msg.includes('doctor')) {
+  return "It’s best to visit a doctor if your symptoms persist. They can run a simple hemoglobin test and recommend supplements if needed.";
+    }
+    if (msg.includes('energy')) {
+  return "Boost your energy by combining iron foods with vitamin C — like spinach + orange juice combo 💪!";
+}
     // Competition / Game info
     if (msg.includes('game') || msg.includes('xp') || msg.includes('quest') || msg.includes('battle')) {
         return "In the IronQuest game, your real-world health progress powers your warrior’s strength ⚔️. Eat well, complete health quests, and gain XP to level up!";
