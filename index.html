@@ -1149,6 +1149,22 @@ function calculateRisk() {
 }
 </script>
 <!-- ===================== END Anemia Symptom Quiz ===================== -->
+<section id="fatigueCheck" style="background:#fff;padding:60px;text-align:center;">
+  <h2>⚡ Check Your Energy Level</h2>
+  <input type="range" min="0" max="10" value="5" id="energySlider" style="width:60%;">
+  <p id="energyOutput" style="margin-top:20px;font-size:18px;"></p>
+</section>
+
+<script>
+const slider = document.getElementById("energySlider");
+const output = document.getElementById("energyOutput");
+slider.oninput = function() {
+  const val = this.value;
+  if (val < 4) output.textContent = "😴 Low Energy — You may need more iron.";
+  else if (val < 7) output.textContent = "🙂 Moderate Energy — Keep eating well!";
+  else output.textContent = "💪 Great Energy — Stay consistent!";
+};
+</script>
 
     <!-- Leaderboard Section -->
     <section id="leaderboard" class="leaderboard">
