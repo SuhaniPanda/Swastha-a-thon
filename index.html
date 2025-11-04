@@ -1599,5 +1599,208 @@
         // Log TensorFlow.js version
         console.log('📦 TensorFlow.js version:', tf.version.tfjs);
     </script>
+    <!-- Add this just before closing </body> -->
+<!-- ===================== CHATBOT WIDGET ===================== -->
+<style>
+    /* Floating Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 10000;
+    }
+
+    .chatbot-icon {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .chatbot-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .chatbot-window {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 320px;
+        height: 420px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chatbot-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .chatbot-message {
+        padding: 10px 14px;
+        border-radius: 15px;
+        max-width: 80%;
+        font-size: 14px;
+        line-height: 1.4;
+        word-wrap: break-word;
+    }
+
+    .user-message {
+        background: #e5e7eb;
+        align-self: flex-end;
+    }
+
+    .bot-message {
+        background: #f3f0ff;
+        border-left: 4px solid #667eea;
+        align-self: flex-start;
+    }
+
+    .chatbot-input {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .chatbot-input button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 0 15px 15px 0;
+        transition: background 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c3cfe2;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="chatbot-container">
+    <div class="chatbot-icon" onclick="toggleChatbot()">💬</div>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">IronQuest Assistant ⚔️</div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message chatbot-message">Hello! I’m your IronQuest Assistant. Ask me anything about anemia, iron-rich foods, or the app.</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatInput = document.getElementById('chatInput');
+
+    function toggleChatbot() {
+        chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') sendMessage();
+    }
+
+    function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        appendMessage(userMessage, 'user-message');
+        chatInput.value = '';
+
+        setTimeout(() => {
+            const botResponse = getBotResponse(userMessage);
+            appendMessage(botResponse, 'bot-message');
+        }, 500);
+    }
+
+    function appendMessage(message, className) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chatbot-message ' + className;
+        messageDiv.textContent = message;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getBotResponse(input) {
+        const msg = input.toLowerCase();
+
+        if (msg.includes('hello') || msg.includes('hi')) {
+            return "Hi there! 👋 How can I help you today?";
+        } 
+        if (msg.includes('anemia') || msg.includes('what is anemia')) {
+            return "Anemia is a condition where your blood has fewer red blood cells or less hemoglobin than normal, reducing oxygen flow. Iron deficiency is the most common cause.";
+        }
+        if (msg.includes('symptom')) {
+            return "Common anemia symptoms include fatigue, pale skin, dizziness, cold hands and feet, and shortness of breath.";
+        }
+        if (msg.includes('remedy') || msg.includes('food')) {
+            return "Try including iron-rich foods like spinach, beetroot, pomegranate, jaggery, lentils, and moringa leaves. Also pair them with Vitamin C sources for better absorption!";
+        }
+        if (msg.includes('ironquest') || msg.includes('app')) {
+            return "IronQuest gamifies anemia awareness — you can detect anemia using AI, earn XP, and compete in school challenges for better health!";
+        }
+        if (msg.includes('contact')) {
+            return "You can reach us anytime at support@ironquest.app 📧";
+        }
+        if (msg.includes('thank')) {
+            return "You're welcome! 😊 Stay healthy and keep your iron levels strong!";
+        }
+        return "I'm not sure about that yet 🤔 — but I can help you learn more about anemia, iron-rich foods, or the IronQuest app!";
+    }
+</script>
+<!-- ===================== END CHATBOT WIDGET ===================== -->
+
 </body>
 </html>
