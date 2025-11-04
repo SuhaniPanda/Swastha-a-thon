@@ -1072,6 +1072,83 @@
             </div>
         </div>
     </section>
+<!-- ===================== Anemia Symptom Quiz ===================== -->
+<section id="quiz" style="background:#f8f9fa;padding:80px 20px;">
+  <div style="max-width:700px;margin:auto;text-align:center;">
+    <h2 style="color:#667eea;font-size:36px;margin-bottom:20px;">🩸 Check Your Anemia Risk</h2>
+    <p style="font-size:18px;margin-bottom:30px;color:#555;">Answer a few quick questions to see if you might be at risk for anemia.</p>
+
+    <form id="anemiaQuiz" style="text-align:left;line-height:1.8;">
+      <label><input type="checkbox" name="q1"> I often feel tired or weak during the day.</label><br>
+      <label><input type="checkbox" name="q2"> I get dizzy or lightheaded when standing up.</label><br>
+      <label><input type="checkbox" name="q3"> My nails are pale or brittle.</label><br>
+      <label><input type="checkbox" name="q4"> I experience shortness of breath after mild activity.</label><br>
+      <label><input type="checkbox" name="q5"> I have frequent headaches or poor concentration.</label><br>
+      <label><input type="checkbox" name="q6"> I often look pale or have pale inner eyelids.</label><br>
+      <label><input type="checkbox" name="q7"> I follow a mostly vegetarian or vegan diet.</label><br>
+      <label><input type="checkbox" name="q8"> I skip meals or have low appetite often.</label><br>
+      <label><input type="checkbox" name="q9"> I have heavy periods or recent blood loss.</label><br>
+      <label><input type="checkbox" name="q10"> I frequently feel cold even in normal weather.</label><br>
+
+      <div style="text-align:center;margin-top:30px;">
+        <button type="button" onclick="calculateRisk()" 
+          style="padding:12px 30px;background:linear-gradient(135deg,#667eea,#764ba2);
+          color:white;border:none;border-radius:25px;font-size:16px;font-weight:bold;
+          cursor:pointer;box-shadow:0 4px 12px rgba(102,126,234,0.4);">
+          Submit Quiz
+        </button>
+      </div>
+    </form>
+
+    <div id="quizResult" 
+      style="margin-top:40px;padding:25px;border-radius:15px;
+      background:white;box-shadow:0 5px 20px rgba(0,0,0,0.1);display:none;">
+    </div>
+  </div>
+</section>
+
+<script>
+function calculateRisk() {
+  const quiz = document.getElementById("anemiaQuiz");
+  const resultBox = document.getElementById("quizResult");
+
+  // Count checked answers
+  const yesAnswers = quiz.querySelectorAll("input[type='checkbox']:checked").length;
+
+  let riskLevel = "";
+  let color = "";
+  let advice = "";
+
+  if (yesAnswers <= 3) {
+    riskLevel = "Low Risk 👍";
+    color = "#10b981"; // green
+    advice = "Your symptoms suggest a low risk of anemia. Maintain a balanced iron-rich diet — include spinach, lentils, and vitamin C foods!";
+  } 
+  else if (yesAnswers <= 6) {
+    riskLevel = "Moderate Risk ⚠️";
+    color = "#f59e0b"; // yellow
+    advice = "Some symptoms indicate possible anemia. Consider increasing iron intake and consulting a doctor for a blood test.";
+  } 
+  else {
+    riskLevel = "High Risk 🚨";
+    color = "#ef4444"; // red
+    advice = "Your symptoms suggest a high risk of anemia. Please consult a healthcare professional for proper diagnosis and treatment.";
+  }
+
+  resultBox.style.display = "block";
+  resultBox.innerHTML = `
+    <h3 style="color:${color};font-size:24px;margin-bottom:15px;">${riskLevel}</h3>
+    <p style="font-size:16px;color:#333;margin-bottom:10px;">You answered "Yes" to <strong>${yesAnswers}</strong> out of 10 questions.</p>
+    <p style="font-size:15px;line-height:1.6;">${advice}</p>
+    <button onclick="document.getElementById('remedies').scrollIntoView({behavior:'smooth'});" 
+      style="margin-top:20px;padding:10px 20px;background:${color};color:white;border:none;
+      border-radius:20px;font-weight:bold;cursor:pointer;">
+      View Natural Remedies 🌿
+    </button>
+  `;
+}
+</script>
+<!-- ===================== END Anemia Symptom Quiz ===================== -->
 
     <!-- Leaderboard Section -->
     <section id="leaderboard" class="leaderboard">
