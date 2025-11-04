@@ -1600,52 +1600,130 @@
         console.log('📦 TensorFlow.js version:', tf.version.tfjs);
     </script>
     <!-- Add this just before closing </body> -->
-<!-- ===================== OPEN-SOURCE CHATBOT (Transformers.js) ===================== -->
+<!-- Add this just before closing </body> -->
+<!-- ===================== CHATBOT WIDGET ===================== -->
 <style>
+    /* Floating Chatbot Styles */
     .chatbot-container {
         position: fixed;
         bottom: 25px;
         right: 25px;
         z-index: 10000;
     }
+
     .chatbot-icon {
-        background: linear-gradient(135deg,#667eea,#764ba2);
-        width:65px;height:65px;border-radius:50%;
-        display:flex;align-items:center;justify-content:center;
-        color:#fff;font-size:30px;
-        box-shadow:0 4px 12px rgba(0,0,0,0.3);
-        cursor:pointer;transition:transform .3s;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: transform 0.3s;
     }
-    .chatbot-icon:hover{transform:scale(1.1);}
+
+    .chatbot-icon:hover {
+        transform: scale(1.1);
+    }
+
     .chatbot-window {
-        position:absolute;bottom:80px;right:0;
-        width:340px;height:440px;background:#fff;
-        border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,.3);
-        display:none;flex-direction:column;overflow:hidden;
-        animation:slideUp .3s ease-out;
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 320px;
+        height: 420px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease-out;
     }
-    @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     .chatbot-header {
-        background:linear-gradient(135deg,#667eea,#764ba2);
-        color:#fff;padding:15px;text-align:center;font-weight:bold;font-size:18px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
     }
+
     .chatbot-messages {
-        flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
+
     .chatbot-message {
-        padding:10px 14px;border-radius:15px;max-width:80%;
-        font-size:14px;line-height:1.4;word-wrap:break-word;
+        padding: 10px 14px;
+        border-radius: 15px;
+        max-width: 80%;
+        font-size: 14px;
+        line-height: 1.4;
+        word-wrap: break-word;
     }
-    .user-message{background:#e5e7eb;align-self:flex-end;}
-    .bot-message{background:#f3f0ff;border-left:4px solid #667eea;align-self:flex-start;}
-    .chatbot-input{display:flex;border-top:1px solid #ddd;}
-    .chatbot-input input{flex:1;border:none;padding:10px;outline:none;font-size:14px;}
-    .chatbot-input button{
-        background:linear-gradient(135deg,#667eea,#764ba2);
-        color:white;border:none;padding:10px 15px;cursor:pointer;font-weight:bold;
-        border-radius:0 15px 15px 0;transition:background .3s;
+
+    .user-message {
+        background: #e5e7eb;
+        align-self: flex-end;
     }
-    .chatbot-input button:hover{background:linear-gradient(135deg,#5a67d8,#6b46c1);}
+
+    .bot-message {
+        background: #f3f0ff;
+        border-left: 4px solid #667eea;
+        align-self: flex-start;
+    }
+
+    .chatbot-input {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .chatbot-input button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 0 15px 15px 0;
+        transition: background 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c3cfe2;
+        border-radius: 10px;
+    }
 </style>
 
 <div class="chatbot-container">
@@ -1653,7 +1731,7 @@
     <div class="chatbot-window" id="chatbotWindow">
         <div class="chatbot-header">IronQuest Assistant ⚔️</div>
         <div class="chatbot-messages" id="chatbotMessages">
-            <div class="bot-message chatbot-message">Hello! I’m your open-source IronQuest Assistant. Ask me anything about anemia, iron levels, or the app.</div>
+            <div class="bot-message chatbot-message">Hello! I’m your IronQuest Assistant. Ask me anything about anemia, iron-rich foods, or the app.</div>
         </div>
         <div class="chatbot-input">
             <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
@@ -1662,61 +1740,73 @@
     </div>
 </div>
 
-<script type="module">
-import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0';
+<script>
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatInput = document.getElementById('chatInput');
 
-// Load DistilGPT-2 once at startup
-const chat = await pipeline('text-generation', 'Xenova/distilgpt2');
-console.log("🤖 DistilGPT-2 model loaded (open-source)");
-
-// UI elements
-const chatbotWindow = document.getElementById('chatbotWindow');
-const chatbotMessages = document.getElementById('chatbotMessages');
-const chatInput = document.getElementById('chatInput');
-
-function toggleChatbot() {
-    chatbotWindow.style.display =
-        chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function handleKeyPress(e) {
-    if (e.key === 'Enter') sendMessage();
-}
-
-async function sendMessage() {
-    const userMessage = chatInput.value.trim();
-    if (!userMessage) return;
-
-    appendMessage(userMessage, 'user-message');
-    chatInput.value = '';
-
-    const thinking = appendMessage("Thinking...", 'bot-message');
-
-    try {
-        const result = await chat(userMessage, {
-            max_new_tokens: 60,
-            temperature: 0.8,
-            top_p: 0.9
-        });
-        let text = result[0].generated_text.replace(userMessage, '').trim();
-        // Basic cleanup
-        text = text.split('\n')[0].replace(/^[^A-Za-z]+/, '');
-        thinking.textContent = text || "Hmm... I’m still learning!";
-    } catch (err) {
-        thinking.textContent = "⚠️ Something went wrong loading the model.";
-        console.error(err);
+    function toggleChatbot() {
+        chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
     }
-}
 
-function appendMessage(message, cls) {
-    const div = document.createElement('div');
-    div.className = 'chatbot-message ' + cls;
-    div.textContent = message;
-    chatbotMessages.appendChild(div);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    return div;
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') sendMessage();
+    }
+
+    function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        appendMessage(userMessage, 'user-message');
+        chatInput.value = '';
+
+        setTimeout(() => {
+            const botResponse = getBotResponse(userMessage);
+            appendMessage(botResponse, 'bot-message');
+        }, 500);
+    }
+
+    function appendMessage(message, className) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chatbot-message ' + className;
+        messageDiv.textContent = message;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getBotResponse(input) {
+    const msg = input.toLowerCase();
+
+    if (msg.includes('hello') || msg.includes('hi')) {
+        return "Hi there! 👋 How can I help you today?";
+    } 
+    if (msg.includes('anemia') || msg.includes('what is anemia')) {
+        return "Anemia is a condition where your blood has fewer red blood cells or less hemoglobin than normal, reducing oxygen flow. Iron deficiency is the most common cause.";
+    }
+    if (msg.includes('symptom')) {
+        return "Common anemia symptoms include fatigue, pale skin, dizziness, cold hands and feet, and shortness of breath.";
+    }
+    if (
+        msg.includes('remedy') || msg.includes('food') || msg.includes('diet') ||
+        msg.includes('iron level') || msg.includes('increase iron') ||
+        msg.includes('improve iron') || msg.includes('raise iron') ||
+        msg.includes('boost iron') || msg.includes('hemoglobin')
+    ) {
+        return "To improve your iron levels naturally:\n\n🥬 Eat iron-rich foods like spinach, beetroot, lentils, moringa, chickpeas, and jaggery.\n🍊 Add Vitamin C sources (like amla, citrus fruits, or tomatoes) — it helps your body absorb iron better.\n🚫 Avoid drinking tea or coffee right after meals — they reduce iron absorption.\n💊 In severe cases, consult a doctor for iron supplements or treatment.";
+    }
+    if (msg.includes('ironquest') || msg.includes('app')) {
+        return "IronQuest gamifies anemia awareness — you can detect anemia using AI, earn XP, and compete in school challenges for better health!";
+    }
+    if (msg.includes('contact')) {
+        return "You can reach us anytime at support@ironquest.app 📧";
+    }
+    if (msg.includes('thank')) {
+        return "You're welcome! 😊 Stay healthy and keep your iron levels strong!";
+    }
+    return "I'm not sure about that yet 🤔 — but I can help you learn more about anemia, iron-rich foods, or the IronQuest app!";
 }
 </script>
-<!-- ===================== END OPEN-SOURCE CHATBOT ===================== -->
+<!-- ===================== END CHATBOT WIDGET ===================== -->
+
 </body>
 </html>
