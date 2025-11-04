@@ -1777,33 +1777,81 @@
     function getBotResponse(input) {
     const msg = input.toLowerCase();
 
-    if (msg.includes('hello') || msg.includes('hi')) {
-        return "Hi there! 👋 How can I help you today?";
-    } 
-    if (msg.includes('anemia') || msg.includes('what is anemia')) {
-        return "Anemia is a condition where your blood has fewer red blood cells or less hemoglobin than normal, reducing oxygen flow. Iron deficiency is the most common cause.";
+    // Greetings
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+        return "Hey there! 👋 How can I help you today?";
     }
-    if (msg.includes('symptom')) {
-        return "Common anemia symptoms include fatigue, pale skin, dizziness, cold hands and feet, and shortness of breath.";
+
+    // About anemia
+    if (msg.includes('anemia') && msg.includes('what')) {
+        return "Anemia is a condition where your blood doesn't have enough healthy red blood cells or hemoglobin. The most common cause is iron deficiency, which limits oxygen flow to your body.";
     }
+    if (msg.includes('type') || msg.includes('kinds of anemia')) {
+        return "There are several types of anemia — iron deficiency anemia, vitamin B12 deficiency anemia, sickle cell anemia, and aplastic anemia are the most common ones.";
+    }
+
+    // Symptoms
+    if (msg.includes('symptom') || msg.includes('sign')) {
+        return "Common symptoms include tiredness, pale skin, dizziness, shortness of breath, cold hands and feet, and brittle nails.";
+    }
+
+    // Causes
+    if (msg.includes('cause')) {
+        return "Anemia can be caused by poor diet, blood loss, pregnancy, or chronic diseases. Iron deficiency is by far the most common cause.";
+    }
+
+    // Foods and diet
     if (
         msg.includes('remedy') || msg.includes('food') || msg.includes('diet') ||
         msg.includes('iron level') || msg.includes('increase iron') ||
         msg.includes('improve iron') || msg.includes('raise iron') ||
-        msg.includes('boost iron') || msg.includes('hemoglobin')
+        msg.includes('boost iron') || msg.includes('hemoglobin') ||
+        msg.includes('how to get more iron')
     ) {
-        return "To improve your iron levels naturally:\n\n🥬 Eat iron-rich foods like spinach, beetroot, lentils, moringa, chickpeas, and jaggery.\n🍊 Add Vitamin C sources (like amla, citrus fruits, or tomatoes) — it helps your body absorb iron better.\n🚫 Avoid drinking tea or coffee right after meals — they reduce iron absorption.\n💊 In severe cases, consult a doctor for iron supplements or treatment.";
+        return "To improve your iron levels:\n\n🥬 Eat iron-rich foods like spinach, beetroot, moringa leaves, chickpeas, lentils, jaggery, and pomegranate.\n🍊 Add Vitamin C foods (like oranges, tomatoes, or amla) to help your body absorb iron better.\n🚫 Avoid tea or coffee right after meals — they block iron absorption.\n💊 For moderate or severe anemia, take iron supplements prescribed by a doctor.";
     }
+    // Vitamin & nutrition info
+    if (msg.includes('vitamin') || msg.includes('nutrient')) {
+        return "Vitamin C helps your body absorb iron better. Also, Vitamin B12 and folate are essential for healthy red blood cells. Combine leafy greens, beans, and citrus fruits in your diet!";
+    }
+    // Home remedies
+    if (msg.includes('home') || msg.includes('natural')) {
+        return "Here are a few home remedies:\n🌿 Drink beetroot and carrot juice daily.\n🍎 Eat apples, pomegranates, and jaggery regularly.\n🥗 Include leafy greens and pulses.\n💧 Stay hydrated and avoid skipping meals.";
+    }
+    // Prevention tips
+    if (msg.includes('prevent')) {
+        return "You can prevent anemia by eating a balanced diet rich in iron, folate, and B12, avoiding excessive caffeine, and getting regular blood tests if you're at risk.";
+    }
+    // IronQuest info
     if (msg.includes('ironquest') || msg.includes('app')) {
-        return "IronQuest gamifies anemia awareness — you can detect anemia using AI, earn XP, and compete in school challenges for better health!";
+        return "IronQuest turns anemia awareness into an adventure! 🎮 You can detect anemia using AI, earn XP through healthy habits, and compete in school challenges.";
     }
-    if (msg.includes('contact')) {
-        return "You can reach us anytime at support@ironquest.app 📧";
+    // AI detection
+    if (msg.includes('ai') || msg.includes('model') || msg.includes('detect')) {
+        return "The AI detection tool analyzes images of eyes, nails, or palms using a deep learning model to identify anemia signs with about 95% accuracy.";
     }
+    // Competition / Game info
+    if (msg.includes('game') || msg.includes('xp') || msg.includes('quest') || msg.includes('battle')) {
+        return "In the IronQuest game, your real-world health progress powers your warrior’s strength ⚔️. Eat well, complete health quests, and gain XP to level up!";
+    }
+    // Recipes
+    if (msg.includes('recipe')) {
+        return "Try these iron-boosting recipes:\n🥘 Palak paneer (spinach & cottage cheese)\n🍲 Dal tadka (lentil curry)\n🥗 Moringa curry\n🍬 Til ki chikki (sesame & jaggery snack)";
+    }
+    // Contact
+    if (msg.includes('contact') || msg.includes('email') || msg.includes('support')) {
+        return "You can reach us anytime at 📧 support@ironquest.app — we’re happy to help!";
+    }
+    // Thanks
     if (msg.includes('thank')) {
-        return "You're welcome! 😊 Stay healthy and keep your iron levels strong!";
+        return "You're welcome! 😊 Stay strong and keep those iron levels up!";
     }
-    return "I'm not sure about that yet 🤔 — but I can help you learn more about anemia, iron-rich foods, or the IronQuest app!";
+    // Motivational
+    if (msg.includes('motivate') || msg.includes('tip') || msg.includes('advice')) {
+        return "Remember: consistency is key 💪. Even small daily habits — eating greens, staying hydrated, sleeping well — make a big difference in your energy and iron levels.";
+    }
+    // Default fallback
+    return "Hmm, I’m not sure about that yet 🤔 — but I can help you learn about anemia, healthy foods, or the IronQuest app!";
 }
 </script>
 <!-- ===================== END CHATBOT WIDGET ===================== -->
